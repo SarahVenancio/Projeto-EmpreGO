@@ -595,7 +595,7 @@ def ver_candidatos(id_vaga):
 
 @app.route('/download/<filename>')
 def download(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=False)
+    return send_from_directory(app.config['UPLOAD_FOLDER'], f'{filename}.pdf', as_attachment=False)
 
 @app.route('/pesquisar', methods=['GET'])
 def pesquisar():
