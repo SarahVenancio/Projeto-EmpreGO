@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Vaga{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1>Editar Vaga</h1>
+            <a href="/empresa"><button class="btn btn-light">VOLTAR</button></a>
+
+            {% if msg_erro %}  <!-- Exibe mensagem de erro, se houver -->
+                <div class="alert alert-danger" role="alert">
+                    {{ msg_erro }}
+                </div>
+            {% endif %}
+
+            <form action="/editar_vaga/{{ vaga.id_vaga }}" method="post" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="titulo" class="form-label">Título da Vaga</label>
+                    <input type="text" class="form-control" id="titulo" name="titulo" value="{{ vaga.titulo }}" required>
+                    <div class="valid-feedback">
+                        Válido!
+                    </div>
+                    <div class="invalid-feedback">
+                        Preencha o título da vaga! Ex: "Gerente de Projetos"
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="descricao" class="form-label">Descrição da Vaga</label>
+                    <textarea class="form-control" id="descricao" name="descricao" rows="5" required>{{ vaga.descricao }}</textarea>
+                    <div class="valid-feedback">
+                        Válido!
+                    </div>
+                    <div class="invalid-feedback">
+                        Preencha a descrição da vaga! Ex: "Gestão de equipes e acompanhamento de cronogramas."
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="formato" class="form-label">Formato de Trabalho</label>
+                    <select class="form-select" id="formato" name="formato" required>
+                        <option value="">Escolha uma opção...</option>
+                        <option {% if vaga.formato == 'Presencial' %} selected {% endif %} value="Presencial">Presencial</option>
+                        <option {% if vaga.formato == 'Remoto' %} selected {% endif %} value="Remoto">Remoto</option>
+                        <option {% if vaga.formato == 'Híbrido' %} selected {% endif %} value="Híbrido">Híbrido</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="tipo" class="form-label">Tipo de Contrato</label>
+                    <select class="form-select" id="tipo" name="tipo" required>
+                        <option value="">Escolha um tipo...</option>
+                        <option {% if vaga.tipo == 'CLT' %} selected {% endif %} value="CLT">CLT</option>
+                        <option {% if vaga.tipo == 'PJ' %} selected {% endif %} value="PJ">PJ</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="local" class="form-label">Local da Vaga (se aplicável)</label>
+                    <input type="text" class="form-control" id="local" name="local" value="{{ vaga.local }}">
+                </div>
+                <div class="mb-3">
+                    <label for="salario" class="form-label">Salário</label>
+                    <input type="text" class="form-control" id="salario" name="salario" value="{{ vaga.salario }}" required>
+                    <div class="valid-feedback">
+                        Válido!
+                    </div>
+                    <div class="invalid-feedback">
+                        Informe o salário!
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-light">Salvar alterações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+        }, false)
+    })
+    })()
+</script>
+
+<!-- Link do Input Mask -->
+<script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.8/dist/inputmask.min.js"></script>
+
+<!-- SCRIPT DE CONFIGURAÇÃO INPUT MASK -->
+<script>
+    Inputmask("numeric", {
+        radixPoint: ",",
+        groupSeparator: ".",
+        digits: 2,
+        autoGroup: true,
+        rightAlign: false,
+        allowMinus: false,
+        prefix: "R$ "
+    }).mask(document.getElementById("salario")); //Máscara para salário
+</script>
+
+{% endblock %}

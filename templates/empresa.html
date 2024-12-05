@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Painel da Empresa{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Painel da Empresa {{ nome_empresa }}</h1>
+            <a href="/cadastrar_vaga"><button class="btn btn-light">NOVA VAGA</button></a>
+            <a href="/"><button class="btn btn-light">PÁGINA INICIAL</button></a>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <h2 class="style-5 mb-3 text-dark">Vagas Ativas:</h2>
+        {% if vagas_ativas %}
+            {% for vaga in vagas_ativas %}
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ vaga.titulo }}</h5>
+                    <p class="card-text">
+                      <strong>Descrição:</strong> {{ vaga.descricao | truncate(50) }}<br>
+                      <strong>Formato:</strong> {{ vaga.formato }}<br>
+                      <strong>Tipo:</strong> {{ vaga.tipo }}
+                    </p>
+                    <a href="/editar_vaga/{{ vaga.id_vaga }}" class="btn btn-light btn-sm me-2">EDITAR</a>
+                    <a href="/status_vaga/{{ vaga.id_vaga }}" class="btn btn-light btn-sm" onclick="return confirm('Tem certeza que deseja inativar esta empresa?')">INATIVAR</a>
+                    <a href="/ver_candidatos/{{ vaga.id_vaga }}" class="btn btn-light btn-sm me-2">CANDIDATOS</a>
+                  </div>
+                </div>                  
+              </div>
+            {% endfor %}
+        {% else %}
+            <p>Nenhuma vaga ativa no momento.</p>
+        {% endif %}
+    </div>
+
+    <div class="row mt-4">
+        <h2 class="style-5 mb-3 text-dark">Vagas Inativas:</h2>
+        {% if vagas_inativas %}
+            {% for vaga in vagas_inativas %}
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ vaga.titulo }}</h5>
+                    <p class="card-text">
+                        <strong>Descrição:</strong> {{ vaga.descricao | truncate(50) }}<br>
+                        <strong>Formato:</strong> {{ vaga.formato }}<br>
+                        <strong>Tipo:</strong> {{ vaga.tipo }}
+                    </p>
+                    <a href="/editar_vaga/{{ vaga.id_vaga }}" class="btn btn-light btn-sm me-5">EDITAR</a>
+                    <a href="/status_vaga/{{ vaga.id_vaga }}" class="btn btn-light btn-sm" onclick="return confirm('Tem certeza que deseja ativar esta empresa?')">REATIVAR</a>
+                    <a href="/excluir_vaga/{{ vaga.id_vaga }}" class="btn btn-light btn-sm" onclick="return confirm('Tem certeza que deseja excluir esta vaga?')">EXCLUIR</a>
+                    </div>
+                </div>                  
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>Nenhuma vaga inativa no momento.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

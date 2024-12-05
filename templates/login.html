@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center"> <!-- Centraliza horizontalmente -->
+        <div class="col-md-6"> <!-- Ocupa metade da tela em telas médias e maiores -->
+            <h1 class="text-center mb-4">Login</h1>
+
+            {% if msgerro %}
+                <div class="alert alert-danger" role="alert">
+                    {{ msgerro }}
+                </div>
+            {% endif %}
+
+            <form action="/login" method="post" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Insira seu e-mail" required>
+                    <div class="valid-feedback">
+                        Válido!
+                    </div>
+                    <div class="invalid-feedback">
+                        Informe o email!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="senha" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="senha" name="senha" placeholder="Insira sua senha" required>
+                    <div class="valid-feedback">
+                        Válido!
+                    </div>
+                    <div class="invalid-feedback">
+                        Informe a senha!
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-light w-100">Acessar</button> <p></p>
+                <p class="text-center"> <a href="/">Voltar</a> </p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+        }, false)
+    })
+    })()
+</script>
+
+{% endblock %}

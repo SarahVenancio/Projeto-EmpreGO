@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Currículos{% endblock %}
+
+{% block content %}
+    <div class="arquivo-list-container">
+        <h2>Currículos</h2>
+        <ul>
+            {% for candidato in candidatos %}
+            <li class="mb-3 border-bottom py-2">
+                {{ candidato.nome }} - {{ candidato.telefone }} - {{ candidato.email }}
+                <a href="/download/{{ candidato.curriculo}}" class="btn btn-light download" target="_blank">Baixar</a>
+                <a href="/delete/{{ candidato.curriculo}}" class="btn btn-light excluir">Excluir</a>
+            </li>
+            {% else %}
+                <p>Nenhum arquivo encontrado!</p>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+{% endblock %}

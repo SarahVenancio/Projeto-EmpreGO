@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head lang="pt-br">
+	  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Link do Bootstrap -->
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css">
+    <!-- Link do CSS próprio -->
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="icon" href="../static/img/logo.ico">
+  </head>
+  <body class="d-flex flex-column">
+    <!-- Cabeçalho -->
+    <header>
+      {% include "header.html" %}
+    </header>
+
+    <!-- Corpo -->
+    <main class="container mt-5 flex-fill">{% block content %}{% endblock %}
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-light text-center py-3 mt-5">{% include "footer.html" %}</footer>
+
+    <!-- Scripts do Bootstrap -->
+    <script src="../static/bootstrap/js/bootstrap.js"></script>
+  </body>
+</html>

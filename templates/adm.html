@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Painel do Administrador{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h1>Painel do Administrador</h1>
+    <a href="/cadastrar_empresa"><button class="btn btn-light">NOVA EMPRESA</button></a>
+    <a href="/"><button class="btn btn-light">PÁGINA INICIAL</button></a>
+    <hr>
+
+    <h2>Empresas Ativas:</h2>
+    <div class="row mt-4">
+        {% if empresas_ativas %}
+            {% for empresa in empresas_ativas %}
+                <div class="col-12 col-md-6 col-lg-4 mb-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ empresa.nome_empresa }}</h5>
+                      <p class="card-text">
+                        <strong>CNPJ:</strong> {{ empresa.cnpj }}<br>
+                        <strong>E-mail:</strong> {{ empresa.email }}<br>
+                        <strong>Telefone:</strong> {{ empresa.telefone }}
+                      </p>
+                      <a href="/editar_empresa/{{ empresa.id_empresa }}"><button class="btn btn-light btn-sm me-2">EDITAR</button></a>
+                    <a href="/status_empresa/{{ empresa.id_empresa }}"><button onclick="return confirm('Deseja realmente desativar essa empresa?')" class="btn btn-light btn-sm">DESATIVAR</button></a>
+                    </div>
+                  </div>                  
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Nenhuma empresa ativa cadastrada.</p>
+        {% endif %}
+    </div>
+
+    <h2>Empresas Inativas:</h2>
+    <div class="row mt-4">
+      {% if empresas_inativas %}
+          {% for empresa in empresas_inativas %}
+              <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ empresa.nome_empresa }}</h5>
+                    <p class="card-text">
+                      <strong>CNPJ:</strong> {{ empresa.cnpj }}<br>
+                      <strong>E-mail:</strong> {{ empresa.email }}<br>
+                      <strong>Telefone:</strong> {{ empresa.telefone }}
+                    </p>
+                    <a href="/status_empresa/{{ empresa.id_empresa }}"><button class="btn btn-light btn-sm">REATIVAR</button></a>
+                    <a href="/excluir_empresa/{{ empresa.id_empresa }}"><button onclick="return confirm('Deseja realmente excluir essa empresa?')" class="btn btn-light btn-sm">EXCLUIR</button></a>
+                  </div>
+                </div>
+              </div>
+          {% endfor %}
+      {% else %}
+          <p>Nenhuma empresa inativa cadastrada.</p>
+      {% endif %}
+  </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}Contato{% endblock %}
+
+{% block content %}
+
+<div id="contato">
+    <h1 class="text-center">Contate-nos</h1>
+    <p style="font-size: large;">A equipe da <strong>EmpreGO</strong> está pronta para ajudar! Entre em contato conosco para tirar dúvidas, obter suporte ou receber mais informações sobre como podemos ajudar você a encontrar a vaga ou o talento ideal.</p>
+    <hr>
+    <h2 class="text-center">Fale Conosco</h2>
+    <p class="text-center">Preencha o formulário abaixo e responderemos o mais rápido possível.</p>
+
+    <div class="container">
+        <div class="row justify-content-center"> <!-- Centraliza horizontalmente -->
+            <div class="col-md-6"> <!-- Ocupa metade da tela em telas médias e maiores -->
+    
+                {% if msgerro %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ msgerro }}
+                    </div>
+                {% endif %}
+    
+                <form action="/contato" method="post" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="nome_completo" class="form-label">Nome Completo</label>
+                        <input type="text" class="form-control" id="nome_completo" name="nome_completo" required>
+                        <div class="valid-feedback">
+                            Válido!
+                        </div>
+                        <div class="invalid-feedback">
+                            Preencha o nome!
+                        </div>                    
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-mail</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Insira seu e-mail" required>
+                        <div class="valid-feedback">
+                            Válido!
+                        </div>
+                        <div class="invalid-feedback">
+                            Informe o email!
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="assunto" class="form-label">Assunto:</label>
+                        <input type="text" class="form-control" id="assunto" name="assunto" placeholder="Insira o assunto" required>
+                        <div class="valid-feedback">
+                            Válido!
+                        </div>
+                        <div class="invalid-feedback">
+                            Preencha o campo com assunto do que você quer relatar!
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="mensagem" class="form-label">Mensagem:</label>
+                        <textarea class="form-control" id="mensagem" name="mensagem" rows="5" required></textarea>
+                        <div class="valid-feedback">
+                            Válido!
+                        </div>
+                        <div class="invalid-feedback">
+                            Preencha a Mensagem!
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-light w-100">Enviar</button> <p></p>
+                    <p class="text-center"> <a href="/">Voltar</a> </p>
+                </form>
+            </div>
+        </div>
+    </div>
+<hr>
+ 
+<h2 class="text-center">Outros Canais</h2>
+<p class="text-center" style="font-size: large;">Você também pode nos contatar através dos seguintes canais:</p>
+<p class="text-center"><strong>Email:</strong> empreGO.contato@gmail.com</p>
+<p class="text-center"><strong>Telefone:</strong> (11) 1234-5678</p>
+<p class="text-center"><strong>Endereço:</strong> Rua Inovação, 1234 – Bairro Tecnológico</p>
+ 
+ <script>
+     (() => {
+   'use strict'
+ 
+   // Fetch all the forms we want to apply custom Bootstrap validation styles to
+   const forms = document.querySelectorAll('.needs-validation')
+ 
+   // Loop over them and prevent submission
+   Array.from(forms).forEach(form => {
+     form.addEventListener('submit', event => {
+       if (!form.checkValidity()) {
+         event.preventDefault()
+         event.stopPropagation()
+       }
+ 
+       form.classList.add('was-validated')
+     }, false)
+   })
+ })()
+ </script>
+ 
+ <!--script do bs-->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+ 
+ <!--link de inputmask-->
+ <script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.8/dist/inputmask.min.js"></script>
+ 
+ 
+ <!--Validação-->
+ <script>
+     (() => {
+   'use strict'
+ 
+   // Fetch all the forms we want to apply custom Bootstrap validation styles to
+   const forms = document.querySelectorAll('.needs-validation')
+ 
+   // Loop over them and prevent submission
+   Array.from(forms).forEach(form => {
+     form.addEventListener('submit', event => {
+       if (!form.checkValidity()) {
+         event.preventDefault()
+         event.stopPropagation()
+       }
+ 
+       form.classList.add('was-validated')
+     }, false)
+   })
+ })()
+ </script>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}EmpreGO! - {{ vaga.titulo }}{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>{{ vaga.titulo }}</h1>
+            <h5 class="text-muted">{{ vaga.nome_empresa }}</h5>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-8"> <!-- Coluna principal -->
+            <p><strong>Descrição:</strong></p>
+            <p>{{ vaga.descricao }}</p>
+
+            {% if vaga.local %}
+                <p><strong>Local:</strong> {{ vaga.local }}</p>
+            {% endif %}
+
+            {% if vaga.salario %}
+                <p><strong>Salário:</strong> R$ {{ vaga.salario }}</p>
+            {% endif %}
+        </div>
+        <div class="col-12 col-md-4 mt-4 mt-md-0"> <!-- Barra lateral em telas médias e maiores -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Detalhes da Vaga</h5>
+                    <p class="card-text"><strong>Formato:</strong> {{ vaga.formato }}</p>
+                    <p class="card-text"><strong>Tipo:</strong> {{ vaga.tipo }}</p>
+
+                    <!-- Aqui você pode adicionar um botão para candidatar-se à vaga, por exemplo, link para um site externo ou um formulário de contato -->
+                    {% if not session %}
+                    <a href="/candidatar_se/{{ vaga.id_vaga }}" class="btn btn-light">Candidatar-se</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12">
+            <a href="/" class="btn btn-secondary">Voltar</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

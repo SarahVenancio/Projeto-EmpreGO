@@ -1,0 +1,23 @@
+body{
+    min-height: 100vh;
+}
+
+.bg-light{
+    background-color: rgb(221, 231, 248) !important;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+a:hover{
+    color: cornflowerblue;
+}
+
+.btn-light{
+    background-color: rgb(182, 197, 223) !important;
+}
+
+.btn-primary{
+    background-color: rgb(4, 38, 96) !important;
+}
