@@ -613,7 +613,7 @@ def pesquisar():
         '''
         cursor.execute(comandoSQL, (f'%{palavra_chave}%', f'%{palavra_chave}%'))
         vagas = cursor.fetchall()
-        return render_template('resultados_pesquisa.html', vagas=vagas, palavra_chave=palavra_chave)
+        return render_template('index.html', vagas=vagas)
     except Error as erro:
         return f"ERRO! {erro}"
     finally:

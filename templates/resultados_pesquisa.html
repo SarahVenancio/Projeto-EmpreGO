@@ -8,7 +8,7 @@
     {% if vagas %}
         <ul>
             {% for vaga in vagas %}
-                <li class="mb-3 border-bottom py-2">
+                <li>
                     <h2>{{ vaga['titulo'] }}</h2>
                     <p>{{ vaga['descricao'] }}</p>
                     <p><strong>Empresa:</strong> {{ vaga['nome_empresa'] }}</p>
