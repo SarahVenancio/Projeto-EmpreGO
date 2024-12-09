@@ -499,14 +499,14 @@ def candidatar_se(id_vaga):
         
         try:
             timestamp = int(time.time()) #Gera um código
-            nome_curriculo = f"{timestamp}_{id_vaga}_{curriculo.filename}_{email}"
+            nome_curriculo = f"{timestamp}_{id_vaga}_{curriculo.filename}"
             curriculo.save(os.path.join(app.config['UPLOAD_FOLDER'], nome_curriculo)) #Salva o arquivo em uma pasta (nuvem)
             conexao, cursor = conectar_db()
             comandoSQL ='''
-            INSERT INTO candidato (nome, telefone, email, curriculo, id_vaga) 
+            INSERT INTO candidato (nome, email, telefone, curriculo, id_vaga) 
             VALUES (%s,%s,%s,%s,%s)
             '''
-            cursor.execute(comandoSQL, (nome, telefone, email, nome_curriculo, id_vaga))
+            cursor.execute(comandoSQL, (nome, email, telefone, nome_curriculo, id_vaga))
             conexao.commit()
             return render_template('retorno.html', feedback=True)
 
@@ -538,7 +538,7 @@ def upload():
         
         try:
             timestamp = int(time.time()) #Gera um código
-            nome_arquivo = f"{timestamp}_{id_vaga}_{email}_{arquivo.filename}"
+            nome_arquivo = f"{timestamp}_{id_vaga}_{arquivo.filename}"
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], nome_arquivo)) #Salva o arquivo em uma pasta (nuvem)
             conexao, cursor = conectar_db()
             comandoSQL = "INSERT INTO arquivo (nome_arquivo) VALUES (%s)"
@@ -595,7 +595,7 @@ def ver_candidatos(id_vaga):
 
 @app.route('/download/<filename>')
 def download(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], f'{filename}.pdf', as_attachment=False)
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=False)
 
 @app.route('/pesquisar', methods=['GET'])
 def pesquisar():

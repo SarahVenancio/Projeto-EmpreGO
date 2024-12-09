@@ -62,10 +62,10 @@ VALUES
 
 CREATE TABLE candidato (
     id_candidato INT PRIMARY KEY AUTO_INCREMENT,
-    nome_candidato VARCHAR(100) NOT NULL,
+    nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL, 
     telefone CHAR(11) NOT NULL,
-    arquivo VARCHAR(50) NOT NULL, 
+    curriculo VARCHAR(50) NOT NULL, 
     id_vaga INT NOT NULL,
     FOREIGN KEY (id_vaga) REFERENCES vaga (id_vaga)
 );
